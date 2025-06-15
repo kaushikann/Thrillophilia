@@ -39,8 +39,7 @@ if st.button("Search") and city:
                     # Expecting item to have 'name', 'description', 'image', 'link' keys
                     name = item.get('name', 'No Name')
                     desc = item.get('description', 'No Description')
-                    img = item.get('image', None)
-                    link = item.get('link', None)
+                    img = item.get('image_link', None)
                     with st.container():
                         cols = st.columns([1, 4])
                         if img:
