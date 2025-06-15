@@ -35,7 +35,7 @@ if st.button("Search") and city:
                 st.warning("No results found. Please check the city name or try again later.")
             else:
                 st.success(f"Found {len(result)} things to do in {city}!")
-                for item in result:
+                for item in result.content:
                     # Expecting item to have 'name', 'description', 'image', 'link' keys
                     name = item.get('name', 'No Name')
                     desc = item.get('description', 'No Description')
@@ -48,8 +48,7 @@ if st.button("Search") and city:
                             cols[0].write(":grey_question:")
                         cols[1].markdown(f"**{name}**")
                         cols[1].write(desc)
-                        if link:
-                            cols[1].markdown(f"[More Info]({link})")
+                        
         except Exception as e:
             st.error(f"An error occurred: {e}")
 
