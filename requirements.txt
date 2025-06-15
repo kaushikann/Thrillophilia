@@ -2,3 +2,4 @@ streamlit
 scrapegraphai
 nest_asyncio
 playwright
+pytest-playwright
