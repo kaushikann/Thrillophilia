@@ -4,9 +4,12 @@ import streamlit as st
 import nest_asyncio
 nest_asyncio.apply()
 import os
-os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+import dotenv
+dotenv.load_dotenv()
+os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 os.system('playwright install')
 os.system('playwright install-deps')
+
 
 graph_config_openai = {
     "llm": {
