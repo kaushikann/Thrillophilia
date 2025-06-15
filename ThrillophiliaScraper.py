@@ -35,7 +35,7 @@ if st.button("Search") and city:
                 st.warning("No results found. Please check the city name or try again later.")
             else:
                 st.success(f"Found {len(result)} things to do in {city}!")
-                for item in result.content.data:
+                for item in result:
                     # Expecting item to have 'name', 'description', 'image', 'link' keys
                     name = item['name'] if isinstance(item, dict) else str(item)
                     desc = item['description'] if isinstance(item, dict) else 'No Description'
