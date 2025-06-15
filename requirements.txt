@@ -3,3 +3,4 @@ scrapegraphai
 nest_asyncio
 playwright
 pytest-playwright
+chromedriver-autoinstaller
