@@ -3,9 +3,9 @@ from scrapegraphai.graphs import SmartScraperGraph
 import streamlit as st
 import nest_asyncio
 nest_asyncio.apply()
+import os
 os.system('playwright install')
 os.system('playwright install-deps')
-import os
 os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 
 graph_config_openai = {
