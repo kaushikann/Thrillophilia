@@ -43,14 +43,14 @@ if st.button("Search") and city:
                     if isinstance(result['content'], str):
                         try:
                             activities = json.loads(result['content'])
-                            st.write(activities)
+                            
                         except Exception as e:
                             st.warning(f"Could not parse JSON content: {e}")
-            if not result:
+            if not activities:
                 st.warning("No results found. Please check the city name or try again later.")
             else:
                 st.success(f"Found {len(result)} things to do in {city}!")
-                for item in result:
+                for item in activities:
                     # Expecting item to have 'name', 'description', 'image', 'link' keys
                     name = item['name']
                     desc = item['description']
