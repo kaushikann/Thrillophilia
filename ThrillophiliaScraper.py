@@ -43,7 +43,7 @@ if st.button("Search") and city:
                     if isinstance(result['content'], str):
                         try:
                             activities = json.loads(result['content'])
-                            print(activities)
+                            st.write(activities)
                         except Exception as e:
                             st.warning(f"Could not parse JSON content: {e}")
             if not result:
