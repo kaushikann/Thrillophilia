@@ -52,9 +52,9 @@ if st.button("Search") and city:
                 st.success(f"Found {len(result)} things to do in {city}!")
                 for item in result:
                     # Expecting item to have 'name', 'description', 'image', 'link' keys
-                    name = item['name'] if isinstance(item, dict) else str(item)
-                    desc = item['description'] if isinstance(item, dict) else 'No Description'
-                    img = item['image_link'] if isinstance(item, dict) else None
+                    name = item['name']
+                    desc = item['description']
+                    img = item['image_link']
                     with st.container():
                         cols = st.columns([1, 4])
                         if img:
