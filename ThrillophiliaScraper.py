@@ -38,8 +38,6 @@ if st.button("Search") and city:
                 config=graph_config_openai,
             )
             result = smart_scraper_graph.run()
-            st.write("Raw result type:", type(result))
-            st.write("Raw result:", result)
             activities = []
             if isinstance(result, dict) and 'content' in result:
                 if result['content'] != 'NA':
