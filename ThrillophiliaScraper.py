@@ -30,7 +30,7 @@ if st.button("Search") and city:
             For each activity, extract the following information:
             1. name: The name of the activity
             2. description: A one line description of the activity
-            3. image_link: URL to the image of the activity
+            3. image_link: The URL to the image corresponding to that specific activity
             Return the results as a JSON array of objects with the exact keys.""",
             smart_scraper_graph = OmniScraperGraph(
                 prompt=prompt,
