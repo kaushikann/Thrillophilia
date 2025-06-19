@@ -1,5 +1,5 @@
 import json
-from scrapegraphai.graphs import SmartScraperGraph
+from scrapegraphai.graphs import OmniScraperGraph
 import streamlit as st
 import nest_asyncio
 nest_asyncio.apply()
@@ -32,7 +32,7 @@ if st.button("Search") and city:
             2. description: A one line description of the activity
             3. image_link: URL to the image of the activity
             Return the results as a JSON array of objects with the exact keys.""",
-            smart_scraper_graph = SmartScraperGraph(
+            smart_scraper_graph = OmniScraperGraph(
                 prompt=prompt,
                 source=city_url,
                 config=graph_config_openai,
