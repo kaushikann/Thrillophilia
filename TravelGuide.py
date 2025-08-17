@@ -31,7 +31,9 @@ if st.button("Search") and city:
             For each place, extract the following information:
             1. name: The name of the place
             2. description: A one line description of the place
-            3. image_link: URL to the image of the place
+            3. image_link: URL to the image of the place. To fetch the image URL, use the following steps:
+                1. Find the <img> tag of that place and inside that tag, copy the first link of the data-srcset attribute
+                2. Use the link as the image_link
             Return the results as a JSON array of objects with the exact keys.""",
             smart_scraper_graph = SmartScraperGraph(
                 prompt=prompt,
@@ -56,30 +58,15 @@ if st.button("Search") and city:
                 st.warning("No places found. Please check the city/country name or try again later.")
             else:
                 st.success(f"Found {len(activities)} must visit places in {city}!")
-                # Debug: Show raw results
-                st.write("Debug - Raw activities data:")
-                st.json(activities)
                 for item in activities:
                     # Get data with fallbacks
                     name = item.get('name', 'No Name')
                     desc = item.get('description', 'No Description')
                     img = item.get('image_link') or item.get('image', None)
-                    
-                    # Debug: Print the image value to see what we're getting
-                    st.write(f"Debug - Image value: {img}")
-                    
                     with st.container():
                         cols = st.columns([1, 4])  # Creates a row with 2 columns in 1:4 ratio
-                        if img and isinstance(img, str) and img.strip() and not img.startswith('(://)'):
-                            try:
-                                # Validate URL format before displaying
-                                if img.startswith(('http://', 'https://')):
-                                    cols[0].image(img, width=100)  # Display activity image in first column
-                                else:
-                                    cols[0].write(":grey_question:")  # Show question mark if invalid URL
-                            except Exception as img_error:
-                                st.warning(f"Could not display image: {img_error}")
-                                cols[0].write(":grey_question:")  # Show question mark if image fails
+                        if img:
+                            cols[0].image(img, width=100)  # Display activity image in first column
                         else:
                             cols[0].write(":grey_question:")  # Show question mark if no image
                         cols[1].markdown(f"**{name}**")  # Display activity name in bold in second column
