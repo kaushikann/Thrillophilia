@@ -7,6 +7,7 @@ import os
 os.system('playwright install')
 os.system('playwright install-deps')
 os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+os.environ["SCRAPEGRAPH_API_KEY"] = st.secrets["SCRAPEGRAPH_API_KEY"]
 
 graph_config_openai = {
     "llm": {
@@ -72,4 +73,5 @@ if st.button("Search") and city:
         except Exception as e:
             st.error(f"An error occurred: {e}")
             import traceback
+
             st.code(traceback.format_exc())
