@@ -18,7 +18,7 @@ graph_config_openai = {
     "verbose": True,
 }
 st.title(":blue[Travel Guide]")
-st.write("This guide will help you find the best things to do in a city/country.")
+st.write("This guide will help you find the must visit places in a city/country.")
 city = st.text_input("Enter the city or country you want to visit")
 
 if st.button("Search") and city:
