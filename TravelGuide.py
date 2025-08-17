@@ -30,9 +30,6 @@ if st.button("Search") and city:
             For each place, extract the following information:
             1. name: The name of the place
             2. description: A one line description of the place
-            3. image_link: URL to the image of the place. To fetch the image URL, use the following steps:
-                1. Find the <img> tag of that place and inside that tag, copy the first link of the data-srcset attribute
-                2. Use the link as the image_link
             Return the results as a JSON array of objects with the exact keys.""",
             smart_scraper_graph = SmartScraperGraph(
                 prompt=prompt,
@@ -40,7 +37,6 @@ if st.button("Search") and city:
                 config=graph_config_openai,
             )
             result = smart_scraper_graph.run()
-            st.write(result)
             activities = []
             if isinstance(result, dict) and 'content' in result:
                 if result['content'] != 'NA':
@@ -62,13 +58,13 @@ if st.button("Search") and city:
                     # Get data with fallbacks
                     name = item.get('name', 'No Name')
                     desc = item.get('description', 'No Description')
-                    img = item.get('image_link') or item.get('image', None)
+                    #img = item.get('image_link') or item.get('image', None)
                     with st.container():
                         cols = st.columns([1, 4])  # Creates a row with 2 columns in 1:4 ratio
-                        if img:
-                            cols[0].image(img, width=100)  # Display activity image in first column
-                        else:
-                            cols[0].write(":grey_question:")  # Show question mark if no image
+                        #if img:
+                        #    cols[0].image(img, width=100)  # Display activity image in first column
+                        #else:
+                        #    cols[0].write(":grey_question:")  # Show question mark if no image
                         cols[1].markdown(f"**{name}**")  # Display activity name in bold in second column
                         cols[1].write(desc)  # Display activity description below name
                         
