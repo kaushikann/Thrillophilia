@@ -56,15 +56,30 @@ if st.button("Search") and city:
                 st.warning("No places found. Please check the city/country name or try again later.")
             else:
                 st.success(f"Found {len(activities)} must visit places in {city}!")
+                # Debug: Show raw results
+                st.write("Debug - Raw activities data:")
+                st.json(activities)
                 for item in activities:
                     # Get data with fallbacks
                     name = item.get('name', 'No Name')
                     desc = item.get('description', 'No Description')
                     img = item.get('image_link') or item.get('image', None)
+                    
+                    # Debug: Print the image value to see what we're getting
+                    st.write(f"Debug - Image value: {img}")
+                    
                     with st.container():
                         cols = st.columns([1, 4])  # Creates a row with 2 columns in 1:4 ratio
-                        if img:
-                            cols[0].image(img, width=100)  # Display activity image in first column
+                        if img and isinstance(img, str) and img.strip() and not img.startswith('(://)'):
+                            try:
+                                # Validate URL format before displaying
+                                if img.startswith(('http://', 'https://')):
+                                    cols[0].image(img, width=100)  # Display activity image in first column
+                                else:
+                                    cols[0].write(":grey_question:")  # Show question mark if invalid URL
+                            except Exception as img_error:
+                                st.warning(f"Could not display image: {img_error}")
+                                cols[0].write(":grey_question:")  # Show question mark if image fails
                         else:
                             cols[0].write(":grey_question:")  # Show question mark if no image
                         cols[1].markdown(f"**{name}**")  # Display activity name in bold in second column
@@ -73,5 +88,4 @@ if st.button("Search") and city:
         except Exception as e:
             st.error(f"An error occurred: {e}")
             import traceback
-
             st.code(traceback.format_exc())
