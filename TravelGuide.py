@@ -18,9 +18,8 @@ graph_config_openai = {
     "verbose": True,
 }
 st.title(":blue[Travel Guide]")
-st.subheader("This guide will help you find the best things to do in a city.")
-st.write("Enter the city or country you want to visit.")
-city = st.text_input("City")
+st.write("This guide will help you find the best things to do in a city/country.")
+city = st.text_input("Enter the city or country you want to visit")
 
 if st.button("Search") and city:
     city_url = f"https://www.thrillophilia.com/places-to-visit-in-{city}"
@@ -41,6 +40,7 @@ if st.button("Search") and city:
                 config=graph_config_openai,
             )
             result = smart_scraper_graph.run()
+            st.write(result)
             activities = []
             if isinstance(result, dict) and 'content' in result:
                 if result['content'] != 'NA':
